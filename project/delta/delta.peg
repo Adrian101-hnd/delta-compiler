@@ -1,0 +1,27 @@
+comments = r'[/][/].*|[/][*](.|\n)*?[*][/]'
+identifier = r'[a-zA-Z]\w*'
+program = statement* expression EOF
+statement = declaration / assignment / if / while
+declaration = 'var' decl_variable (',' decl_variable)* ';'
+decl_variable = identifier
+assignment = lhs_variable '=' expression ';'
+if = 'if' expression block ( 'else' block )?
+while = 'while' expression block
+block = '{' statement* '}'
+lhs_variable = identifier
+expression = comparison ('&&' comparison)*
+comparison = additive (('==' / '!=' / '>=' / '>' / '<=' / '<') additive)*
+additive = multiplicative (('+' / '-') multiplicative)*
+multiplicative = unary (('*' / '/' / '%') unary)*
+unary = ('+' / '-' / '!')* primary
+primary = decimal / boolean / parenthesis / rhs_variable / binary / octal / hexadecimal
+decimal = r'\d+'
+boolean = 'true' / 'false'
+parenthesis = '(' expression ')'
+rhs_variable = identifier
+
+//Author : Adrian Bravo Lopez A01752067
+
+binary = r'#[b|B](0|1)+'
+octal = r'#(o|O)([0-7])+\b'
+hexadecimal = r'#(x|X)([0-9]|[A-Z]|[a-z])+\b'
