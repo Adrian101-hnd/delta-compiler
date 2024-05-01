@@ -61,6 +61,8 @@ class SemanticVisitor(PTNodeVisitor):
                 'Undeclared variable reference at position '
                 f'{self.position(node)} => {name}'
             )
+        
+    #Changes to help the compiler notice overflows in the int values
     
     def visit_binary(self,node,children):
         decimal = int(node.value[2:], 2)

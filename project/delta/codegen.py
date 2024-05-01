@@ -68,7 +68,8 @@ class CodeGenerationVisitor(PTNodeVisitor):
             + '    end\n'
             + '    end\n')
 
-    
+    #do wasm representation
+
     def visit_do(self,node,children):
         result = ('    loop\n'
                   +children[0]
@@ -96,6 +97,7 @@ class CodeGenerationVisitor(PTNodeVisitor):
                       '    end\n' * (len(children) - 1))
         return ''.join(result)
     
+    #visit for the or expression, similar to the visit_expression which handles the and operator
     def visit_or_expression(self,node,children):
         if len(children) == 1:
             return children[0]
@@ -109,6 +111,7 @@ class CodeGenerationVisitor(PTNodeVisitor):
         result.append('    end\n' * (len(children) - 1))
         return ''.join(result)
     
+    #Handles comparison operators such as == and < >
     def visit_comparison(self,node,children):
         result = [children[0]]
         for i in range(1, len(children), 2):
@@ -183,6 +186,9 @@ class CodeGenerationVisitor(PTNodeVisitor):
     def visit_rhs_variable(self, node, children):
         name = node.value
         return f'    local.get ${name}\n'
+    
+
+    #Visits for the binary, octal and hexadecimal representations of the ints
     
     def visit_binary(self, node, children):
         number = node.value[2:]
