@@ -188,11 +188,12 @@ class CodeGenerationVisitor(PTNodeVisitor):
         number = node.value[2:]
         counter = 0
         value = 1
-        print(number)
         for char in number[::-1]:
             if(char == '1'):
                 counter = counter + value
             value = value * 2
+        
+        
         
         return f'    i32.const { counter }\n'
     

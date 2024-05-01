@@ -25,4 +25,5 @@ rhs_variable = identifier
 //Definicion de binario, octal y hexadecimal
 binary = r'#[b|B](0|1)+'
 octal = r'#(o|O)([0-7])+\b'
-hexadecimal = r'#(x|X)([0-9]|[A-Z]|[a-z])+\b'
+hexadecimal = r'#(x|X)([0-9]|[A-F]|[a-f])+\b'
+
