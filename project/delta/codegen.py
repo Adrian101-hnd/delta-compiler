@@ -34,6 +34,7 @@ class CodeGenerationVisitor(PTNodeVisitor):
 
     def visit_assignment(self, node, children):
         return children[1] + children[0]
+    
 
     def visit_if(self, node, children):
         result = (children[0]
@@ -50,6 +51,10 @@ class CodeGenerationVisitor(PTNodeVisitor):
 
         result += '    end\n' * (len(children) // 2)
         return result
+    
+    def visit_block(self, node, children):
+        return ''.join(children)
+    
 
     def visit_while(self, node, children):
         return (
@@ -63,12 +68,20 @@ class CodeGenerationVisitor(PTNodeVisitor):
             + '    end\n'
             + '    end\n')
 
-    def visit_block(self, node, children):
-        return ''.join(children)
+    
+    def visit_do(self,node,children):
+        result = ('    loop\n'
+                  +children[0]
+                  +children[1]
+                  +'    br_if 0\n'
+                  +'    end\n')
+        return result
 
     def visit_lhs_variable(self, node, children):
         name = node.value
         return f'    local.set ${name}\n'
+    
+    
 
     def visit_expression(self, node, children):
         if len(children) == 1:

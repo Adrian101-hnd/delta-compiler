@@ -1,16 +1,17 @@
 comments = r'[/][/].*|[/][*](.|\n)*?[*][/]'
 identifier = r'[a-zA-Z]\w*'
 program = statement* expression EOF
-statement = declaration / assignment / if / while
+statement = declaration / assignment / if / while / do
 declaration = 'var' decl_variable (',' decl_variable)* ';'
 decl_variable = identifier
 assignment = lhs_variable '=' expression ';'
-if = 'if' expression block ('else if' expression block)* ( 'else' block )?
+if = 'if' expression block ('else if' expression block)* ( 'else' block )? //Added else if as a repeatable expression before the else
 while = 'while' expression block
 block = '{' statement* '}'
+do = 'do' block 'while' expression ';'
 lhs_variable = identifier
-expression = comparison ('&&' comparison)*
-comparison = additive (('==' / '!=' / '>=' / '>' / '<=' / '<') additive)*
+expression = comparison ('&&' comparison)* //Changed order to handle comparison before additive
+comparison = additive (('==' / '!=' / '>=' / '>' / '<=' / '<') additive)* //Added the comparison operators
 additive = multiplicative (('+' / '-') multiplicative)*
 multiplicative = unary (('*' / '/' / '%') unary)*
 unary = ('+' / '-' / '!')* primary
@@ -20,8 +21,7 @@ boolean = 'true' / 'false'
 parenthesis = '(' expression ')'
 rhs_variable = identifier
 
-//Author : Adrian Bravo Lopez A01752067
-
+//Definicion de binario, octal y hexadecimal
 binary = r'#[b|B](0|1)+'
 octal = r'#(o|O)([0-7])+\b'
 hexadecimal = r'#(x|X)([0-9]|[A-Z]|[a-z])+\b'
