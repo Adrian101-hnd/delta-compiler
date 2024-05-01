@@ -1,3 +1,4 @@
+// Author: A01752067 Adrian Bravo Lopez
 comments = r'[/][/].*|[/][*](.|\n)*?[*][/]'
 identifier = r'[a-zA-Z]\w*'
 program = statement* expression EOF

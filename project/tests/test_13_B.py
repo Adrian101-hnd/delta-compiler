@@ -1,4 +1,5 @@
 # File: tests/test_B_comparisons.py
+# Author: A01752067 Adrian Bravo Lopez
 
 from unittest import TestCase
 from delta import Compiler, SyntaxMistake

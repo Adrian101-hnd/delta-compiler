@@ -1,4 +1,5 @@
 # File: tests/test_A_bin_oct_hex.py
+# Author: A01752067 Adrian Bravo Lopez
 
 from unittest import TestCase
 from delta import Compiler, SyntaxMistake
